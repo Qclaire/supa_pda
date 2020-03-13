@@ -20,7 +20,7 @@ class _ClockState extends State<Clock> {
   int streamId;
   bool countdown = false;
   void timer() async {
-    if (run == true && second > 1 || minute > 0) await sounds.play(startSound);
+    if (run == true && second > 10 || minute > 0) await sounds.play(startSound);
 
     Timer.periodic(Duration(seconds: 1), (timeout) async {
       if (!run) {
@@ -36,7 +36,7 @@ class _ClockState extends State<Clock> {
             streamId = await sounds.play(countdownSound);
           });
         }
-        if (second <= 1) {
+        if (second <= 1 && minute == 0) {
           await sounds.play(timeupSound);
         }
       } else if (second <= 1 && minute > 0) {
@@ -58,6 +58,7 @@ class _ClockState extends State<Clock> {
 
   void loadSounds() async {
     sounds = Soundpool(streamType: StreamType.alarm, maxStreams: 3);
+
     startSound =
         await rootBundle.load("assets/timer/sounds/start.mp3").then((data) {
       return sounds.load(data);
@@ -71,6 +72,8 @@ class _ClockState extends State<Clock> {
         await rootBundle.load("assets/timer/sounds/timeup.mp3").then((data) {
       return sounds.load(data);
     });
+    await sounds.setVolume(soundId: countdownSound, volume: 0.70);
+    await sounds.setVolume(soundId: timeupSound, volume: 0.80);
   }
 
   @override
@@ -127,7 +130,8 @@ class _ClockState extends State<Clock> {
                     child: Text(
                       "${minute < 10 ? "0$minute" : minute}",
                       style: TextStyle(
-                          fontSize: 460,
+                          fontFamily: "times",
+                          fontSize: 500,
                           fontWeight: FontWeight.bold,
                           color: Colors.black),
                     ),
@@ -152,9 +156,10 @@ class _ClockState extends State<Clock> {
                     child: Text(
                       "${second < 10 ? "0$second" : second}",
                       style: TextStyle(
+                          fontFamily: "times",
                           fontSize: 460,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black54),
+                          color: Colors.brown),
                     ),
                   ),
                 ],
