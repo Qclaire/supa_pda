@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:soundpool/soundpool.dart';
 
-class Clock extends StatefulWidget {
+class TimerPage extends StatefulWidget {
+  static String routeName = "timer_page";
   @override
-  _ClockState createState() => _ClockState();
+  _TimerPageState createState() => _TimerPageState();
 }
 
-class _ClockState extends State<Clock> {
+class _TimerPageState extends State<TimerPage> {
   var second = 0;
   var minute = 0;
   bool run = false;
@@ -90,6 +91,10 @@ class _ClockState extends State<Clock> {
     int mdown = 0;
     int sdown = 0;
     int mod = 5;
+
+    SystemChrome.setPreferredOrientations(
+        [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight]);
+
     return MaterialApp(
       home: SafeArea(
         child: Scaffold(
