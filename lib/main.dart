@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:superpda/qr_scanner/main.dart';
 import 'package:superpda/stop_watch/main.dart';
 
 import 'index.dart';
@@ -24,6 +25,7 @@ class MainPage extends StatelessWidget {
       routes: {
         HomePage.routeName: (context) => HomePage(),
         TimerPage.routeName: (context) => TimerPage(),
+        ScannerPage.routeName: (context) => ScannerPage(),
       },
     );
   }

@@ -20,6 +20,7 @@ class _TimerPageState extends State<TimerPage> {
   int timeupSound;
   int streamId;
   bool countdown = false;
+
   void timer() async {
     if (run == true && second > 10 || minute > 0) await sounds.play(startSound);
 
@@ -174,5 +175,11 @@ class _TimerPageState extends State<TimerPage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+//    controller?.dispose();
+    super.dispose();
   }
 }
